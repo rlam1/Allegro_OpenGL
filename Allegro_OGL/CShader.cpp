@@ -28,7 +28,8 @@ bool CShader::loadShader(std::string sFile, int a_iType)
     fclose(fp);
 
     const char** sProgram = new const char*[ESZ(sLines)];
-    FOR(i, ESZ(sLines))sProgram[i] = sLines[i].c_str();
+    FOR(i, ESZ(sLines))
+        sProgram[i] = sLines[i].c_str();
 
     uiShader = glCreateShader(a_iType);
 

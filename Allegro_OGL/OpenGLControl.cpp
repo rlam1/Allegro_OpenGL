@@ -15,12 +15,13 @@ of specified version. If succeeds,
 returns true.
 
 /*---------------------------------------------*/
-bool COpenGLControl::InitOpenGL(void(*a_InitScene)(LPVOID), void(*a_RenderScene)(LPVOID), void(*a_ReleaseScene)(LPVOID), LPVOID lpParam)
+bool COpenGLControl::InitOpenGL(void(*a_InitScene)(LPVOID), void(*a_RenderScene)(LPVOID), void(*a_ReleaseScene)(LPVOID), std::string sTitle, LPVOID lpParam)
 {
     al_init();
     display = nullptr;
     al_set_new_display_flags(ALLEGRO_OPENGL | ALLEGRO_OPENGL_FORWARD_COMPATIBLE | ALLEGRO_RESIZABLE);
     display = al_create_display(640, 480);
+    al_set_window_title(display, sTitle.c_str());
 
     RenderScene = a_RenderScene;
     InitScene = a_InitScene;

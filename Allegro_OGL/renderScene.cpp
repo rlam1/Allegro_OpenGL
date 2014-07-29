@@ -136,6 +136,9 @@ Result:	Releases OpenGL scene.
 
 void ReleaseScene(LPVOID lpParam)
 {
+    glDeleteVertexArrays(2, uiVAO);
+    glDeleteBuffers(4, uiVBO);
+
     spMain.DeleteProgram();
 
     shVertex.deleteShader();

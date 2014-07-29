@@ -14,7 +14,7 @@ of OpenGL
 
 class COpenGLControl {
 public:
-    bool InitOpenGL(void(*a_InitScene)(LPVOID), void(*a_RenderScene)(LPVOID), void(*a_ReleaseScene)(LPVOID), LPVOID lpParam);
+    bool InitOpenGL(void(*a_InitScene)(LPVOID), void(*a_RenderScene)(LPVOID), void(*a_ReleaseScene)(LPVOID), std::string sTitle, LPVOID lpParam);
 
     void ResizeOpenGLViewportFull();
 

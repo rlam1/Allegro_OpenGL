@@ -12,7 +12,7 @@ COpenGLWinApp appMain;
 /*Creates main application window.*/
 bool COpenGLWinApp::CreateAppWindow(std::string sTitle)
 {
-    if (!oglControl.InitOpenGL(InitScene, RenderScene, NULL, &oglControl))
+    if (!oglControl.InitOpenGL(InitScene, RenderScene, NULL, sTitle, &oglControl))
         return false;
 
     return true;
@@ -30,6 +30,7 @@ void COpenGLWinApp::AppBody()
     al_start_timer(tick);
 
     bool done = false;
+    bool draw = false;
 
     while (!done)
     {
@@ -46,10 +47,16 @@ void COpenGLWinApp::AppBody()
                 oglControl.ResizeOpenGLViewportFull();
                 break;
             case ALLEGRO_EVENT_TIMER:
-                oglControl.Render(&oglControl);
+                draw = true;
                 break;
             default:
                 break;
+        }
+
+        if (al_is_event_queue_empty(queue) && draw == true)
+        {
+            draw = false;
+            oglControl.Render(&oglControl);
         }
     }
 }
