@@ -6,6 +6,10 @@ class COpenGLWinApp {
 public:
     COpenGLControl oglControl; // OpenGL Control
 
+    void ResetTimer();
+    void UpdateTimer();
+    float sof(float fVal);
+
     bool CreateAppWindow(std::string sTitle);
 
     void AppBody();
@@ -15,6 +19,8 @@ private:
     std::string sAppName;
 
     bool bAppActive; // To check if application is active (not minimized)
+    DWORD dwLastFrame;
+    float fFrameInterval;
 
     ALLEGRO_DISPLAY *display;
 };

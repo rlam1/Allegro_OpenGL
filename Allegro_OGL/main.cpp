@@ -9,6 +9,27 @@
 
 COpenGLWinApp appMain;
 
+/*Resets app timer (ex: after re-acvtivation of window)*/
+void COpenGLWinApp::ResetTimer()
+{
+    dwLastFrame = GetTickCount();
+    fFrameInterval = 0.0f;
+}
+
+/*Updates appliccation timer*/
+void COpenGLWinApp::UpdateTimer()
+{
+    DWORD dwCur = GetTickCount();
+    fFrameInterval = float(dwCur - dwLastFrame)*0.001f;
+    dwLastFrame = dwCur;
+}
+
+/*SOF = speed optimized float*/
+float COpenGLWinApp::sof(float fVal)
+{
+    return fVal*fFrameInterval;
+}
+
 /*Creates main application window.*/
 bool COpenGLWinApp::CreateAppWindow(std::string sTitle)
 {
