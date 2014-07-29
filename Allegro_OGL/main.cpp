@@ -22,7 +22,7 @@ bool COpenGLWinApp::CreateAppWindow(std::string sTitle)
 void COpenGLWinApp::AppBody()
 {
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
-    ALLEGRO_TIMER *tick = al_create_timer(1.0 / 60.0);
+    ALLEGRO_TIMER *tick = al_create_timer(1.0 / 75.0);
 
     al_register_event_source(queue, al_get_display_event_source(al_get_current_display()));
     al_register_event_source(queue, al_get_timer_event_source(tick));
