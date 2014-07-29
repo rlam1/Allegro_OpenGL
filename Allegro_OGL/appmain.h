@@ -16,7 +16,7 @@ private:
 
     bool bAppActive; // To check if application is active (not minimized)
 
-    ALLEGRO_DISPLAY *display
+    ALLEGRO_DISPLAY *display;
 };
 
 namespace Keys

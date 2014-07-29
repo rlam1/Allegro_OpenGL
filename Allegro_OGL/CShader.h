@@ -15,11 +15,11 @@ public:
     UINT getShaderID();
 private:
     // ID of shader
-    UINT uiShader();
+    UINT uiShader;
     // GL_VERTEX_SHADER, GL_FRAGMENT_SHADER...
-    int iType();
+    int iType;
     // Whether shader was loaded and compiled
-    bool bLoaded();
+    bool bLoaded;
 };
 
 
