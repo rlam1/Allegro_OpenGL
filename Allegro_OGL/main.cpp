@@ -44,6 +44,7 @@ void COpenGLWinApp::AppBody()
 {
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     ALLEGRO_TIMER *tick = al_create_timer(1.0 / 75.0);
+    ALLEGRO_DISPLAY *display = al_get_current_display();
 
     al_register_event_source(queue, al_get_display_event_source(al_get_current_display()));
     al_register_event_source(queue, al_get_timer_event_source(tick));
@@ -66,8 +67,12 @@ void COpenGLWinApp::AppBody()
             case ALLEGRO_EVENT_DISPLAY_RESIZE:
                 al_acknowledge_resize(al_get_current_display());
                 oglControl.ResizeOpenGLViewportFull();
+                oglControl.setProjection3D(45.0f,
+                    (float)al_get_display_width(display) / (float)al_get_display_height(display),
+                    0.001f, 1000.0f);
                 break;
             case ALLEGRO_EVENT_TIMER:
+                UpdateTimer();
                 draw = true;
                 break;
             default:
@@ -93,6 +98,7 @@ int main(int argc, char **argv)
 {
     if (!appMain.CreateAppWindow("03.) Shaders Are Coming - Tutorial by Michal Bubnar (www.mbsoftworks.sk)"))
         return 0;
+    appMain.ResetTimer();
 
     std::cout << argv[0] << std::endl;
 

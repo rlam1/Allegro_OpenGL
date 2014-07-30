@@ -154,3 +154,8 @@ void CShaderProgram::UseProgram()
 {
     if (bLinked)glUseProgram(uiProgram);
 }
+
+UINT CShaderProgram::GetProgramID()
+{
+    return uiProgram;
+}

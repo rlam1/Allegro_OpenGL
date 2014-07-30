@@ -1,8 +1,6 @@
 // Header files of frequent usage
 
-#include <allegro5\allegro.h>
-#include <allegro5\allegro_opengl.h>
-
+#include <ctime>
 #include <algorithm>
 #include <cmath>
 #include <cstring>
@@ -12,6 +10,11 @@
 #include <queue>
 #include <map>
 #include <set>
+
+#include <allegro5\allegro.h>
+#include <allegro5\allegro_opengl.h>
+#define GLM_FORCE_RADIANS
+#include <glm\glm.hpp>
 
 // Some useful defines
 

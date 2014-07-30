@@ -1,6 +1,14 @@
 #include "common_header.h"
 #include "OpenGLControl.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
+COpenGLControl::COpenGLControl()
+{
+    iFPSCount = 0;
+    iCurrentFPS = 0;
+}
+
 /*-----------------------------------------------
 
 Name:	InitOpenGL
@@ -39,6 +47,26 @@ void COpenGLControl::ResizeOpenGLViewportFull()
     GLsizei height = al_get_display_height(display);
 
     glViewport(0, 0, width, height);
+}
+
+/*-----------------------------------------------
+
+Name:	setProjection3D
+
+Params:	fFOV - field of view angle
+fAspectRatio - aspect ratio of width/height
+fNear, fFar - distance of near and far clipping plane
+
+/*---------------------------------------------*/
+
+void COpenGLControl::setProjection3D(float fFOV, float fAspectRatio, float fNear, float fFar)
+{
+    mProjection = glm::perspective(fFOV, fAspectRatio, fNear, fFar);
+}
+
+glm::mat4* COpenGLControl::getProjectionMatrix()
+{
+    return &mProjection;
 }
 
 /*-----------------------------------------------
@@ -85,7 +113,21 @@ Result:	Calls previously set render function.
 
 void COpenGLControl::Render(LPVOID lpParam)
 {
+    clock_t tCurrent = clock();
+    if ((tCurrent - tLastSecond) >= CLOCKS_PER_SEC)
+    {
+        tLastSecond += CLOCKS_PER_SEC;
+        iFPSCount = iCurrentFPS;
+        iCurrentFPS = 0;
+    }
+
     if (RenderScene)RenderScene(lpParam);
+    iCurrentFPS++;
+}
+
+int COpenGLControl::getFPS()
+{
+    return iFPSCount;
 }
 
 /*-----------------------------------------------
@@ -104,4 +146,12 @@ void COpenGLControl::ReleaseOpenGLControl(LPVOID lpParam)
     if (ReleaseScene)ReleaseScene(lpParam);
 
     al_destroy_display(display);
+}
+
+bool COpenGLControl::setVerticalSynchronization(bool bEnabled)
+{
+    if (!wglSwapIntervalEXT)return false;
+    if (bEnabled)wglSwapIntervalEXT(1);
+    else wglSwapIntervalEXT(0);
+    return true;
 }
