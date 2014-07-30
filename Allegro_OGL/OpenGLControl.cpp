@@ -29,13 +29,15 @@ bool COpenGLControl::InitOpenGL(void(*a_InitScene)(LPVOID), void(*a_RenderScene)
     display = nullptr;
     al_set_new_display_flags(ALLEGRO_OPENGL | ALLEGRO_OPENGL_FORWARD_COMPATIBLE | ALLEGRO_RESIZABLE);
     display = al_create_display(640, 480);
+    if (display == nullptr)
+        return false;
     al_set_window_title(display, sTitle.c_str());
 
     RenderScene = a_RenderScene;
     InitScene = a_InitScene;
     ReleaseScene = a_ReleaseScene;
 
-    if (InitScene != NULL)InitScene(lpParam);
+    if (InitScene != nullptr)InitScene(lpParam);
 
     return true;
 }
@@ -43,6 +45,7 @@ bool COpenGLControl::InitOpenGL(void(*a_InitScene)(LPVOID), void(*a_RenderScene)
 /*Resizes viewport to full window with perspective projection.*/
 void COpenGLControl::ResizeOpenGLViewportFull()
 {
+    al_acknowledge_resize(display);
     GLsizei width = al_get_display_width(display);
     GLsizei height = al_get_display_height(display);
 
@@ -98,7 +101,9 @@ control.
 
 void COpenGLControl::MakeCurrent()
 {
-    al_set_target_backbuffer(al_get_current_display());
+    display = al_get_current_display();
+    assert(display != nullptr);
+    al_set_target_backbuffer(display);
 }
 
 /*-----------------------------------------------

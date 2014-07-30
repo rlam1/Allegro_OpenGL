@@ -156,6 +156,26 @@ void RenderScene(LPVOID lpParam)
 
     fRotationAngle += appMain.sof(120.0f);
 
+    if (Keys::Onekey(ALLEGRO_KEY_F2))
+    {
+        bShowFPS = !bShowFPS;
+        if (!bShowFPS)
+        {
+            al_set_window_title(al_get_current_display(), "04.) Going 3D With Transformations - Tutorial by Michal Bubnar (www.mbsoftworks.sk)");
+        }
+    }
+    if (Keys::Onekey(ALLEGRO_KEY_F3))
+    {
+        bVerticalSync = !bVerticalSync;
+        oglControl->setVerticalSynchronization(bVerticalSync);
+    }
+    if (bShowFPS)
+    {
+        char buf[55];
+        sprintf_s(buf, "FPS: %d, V-Sync: %s", oglControl->getFPS(), bVerticalSync ? "On" : "Off");
+        al_set_window_title(al_get_current_display(), buf);
+    }
+
     oglControl->SwapBuffersM();
 }
 

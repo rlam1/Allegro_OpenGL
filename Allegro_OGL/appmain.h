@@ -19,7 +19,7 @@ private:
     std::string sAppName;
 
     bool bAppActive; // To check if application is active (not minimized)
-    DWORD dwLastFrame;
+    clock_t tLastFrame;
     float fFrameInterval;
 
     ALLEGRO_DISPLAY *display;
@@ -27,9 +27,10 @@ private:
 
 namespace Keys
 {
-    int Key(int iKey);
-    int Onekey(int iKey);
-    extern char kp[256];
+    extern ALLEGRO_KEYBOARD_STATE keyState;
+    bool Key(int iKey);
+    bool Onekey(int iKey);
+    extern bool kp[ALLEGRO_KEY_MAX];
 }
 
 extern COpenGLWinApp appMain;
