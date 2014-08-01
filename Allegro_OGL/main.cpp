@@ -80,7 +80,7 @@ void COpenGLWinApp::AppBody()
     bool done = false;
     bool draw = false;
     bool bAppActive = true;
-    oglControl.setProjection3D(45.0f,
+    oglControl.setProjection3D(glm::radians(45.0f),
         (float) al_get_display_width(display) / (float) al_get_display_height(display),
         0.001f, 1000.0f); // First call needed to initialize the projection matrix.
 
@@ -96,7 +96,7 @@ void COpenGLWinApp::AppBody()
                 break;
             case ALLEGRO_EVENT_DISPLAY_RESIZE:
                 oglControl.ResizeOpenGLViewportFull();
-                oglControl.setProjection3D(45.0f,
+                oglControl.setProjection3D(glm::radians(45.0f),
                     (float)al_get_display_width(display) / (float)al_get_display_height(display),
                     0.001f, 1000.0f);
                 break;
@@ -141,7 +141,7 @@ void COpenGLWinApp::Shutdown()
 
 int main(int argc, char **argv)
 {
-    if (!appMain.CreateAppWindow("03.) Shaders Are Coming - Tutorial by Michal Bubnar (www.mbsoftworks.sk)"))
+    if (!appMain.CreateAppWindow("04.) Going 3D With Transformations - Tutorial by Michal Bubnar (www.mbsoftworks.sk)"))
         return 0;
     appMain.ResetTimer();
 

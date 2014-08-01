@@ -14,7 +14,6 @@
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_opengl.h>
 #define GLM_FORCE_RADIANS
-#define degreesToRadians(x) x*(3.141592f/180.0f)
 #include <glm\glm.hpp>
 
 // Some useful defines
